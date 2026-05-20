@@ -1,17 +1,280 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const services = [
+	{
+		title: 'Marketing en redes sociales',
+		text: 'Sistemas de distribucion para Instagram, TikTok, X y Reddit con una estrategia de trafico pensada para convertir atencion en suscriptores.',
+	},
+	{
+		title: 'Optimizacion de estrategia',
+		text: 'Analisis de precios, embudos, retencion, PPV y comportamiento de fans para decidir que mantener, que escalar y que eliminar.',
+	},
+	{
+		title: 'Branding de creadora',
+		text: 'Posicionamiento, tono, narrativa visual y coherencia entre plataformas para que la creadora no parezca una cuenta mas.',
+	},
+	{
+		title: 'Escalado y viralidad',
+		text: 'Testing de hooks, calendario de contenido, expansion multi-cuenta y lectura constante de senales para multiplicar alcance.',
+	},
+	{
+		title: 'Chatting en OnlyFans',
+		text: 'Gestion de conversaciones, upsells, bundles, renovaciones y retencion con protocolos que cuidan la marca y maximizan LTV.',
+	},
+	{
+		title: 'Management integral',
+		text: 'Equipo operativo, seguimiento de KPIs, plan semanal y ejecucion diaria para que la creadora se enfoque en contenido y presencia.',
+	},
+];
+
+const steps = [
+	'Auditoria de marca, contenido, trafico y monetizacion actual.',
+	'Plan de posicionamiento, oferta y calendario de crecimiento.',
+	'Ejecucion de marketing, chatting, optimizacion y reporting.',
+	'Escalado con pruebas semanales y decisiones basadas en datos.',
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+	<main class="overflow-hidden">
+		<header class="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-bon-950/72 backdrop-blur-xl">
+			<div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+				<a class="focus-ring rounded-sm text-sm font-semibold uppercase text-bon-100" href="#inicio">
+					BON Management
+				</a>
+				<nav class="hidden items-center gap-8 text-sm text-bon-100/70 md:flex" aria-label="Principal">
+					<a class="transition hover:text-bon-100" href="#sistema">Sistema</a>
+					<a class="transition hover:text-bon-100" href="#servicios">Servicios</a>
+					<a class="transition hover:text-bon-100" href="#proceso">Proceso</a>
+				</nav>
+				<a
+					class="focus-ring rounded-full bg-bon-100 px-5 py-2 text-sm font-semibold text-bon-950 transition hover:bg-bon-gold"
+					href="#aplicar"
+				>
+					Aplicar
+				</a>
+			</div>
+		</header>
+
+		<section id="inicio" class="relative min-h-screen px-5 pt-32 sm:px-8 lg:pt-40">
+			<div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+				<div data-reveal>
+					<p class="mb-5 inline-flex rounded-full border border-bon-coral/30 bg-bon-coral/10 px-4 py-2 text-sm text-bon-coral">
+						OnlyFans Management para creadoras ambiciosas
+					</p>
+					<h1 class="max-w-4xl text-balance text-5xl font-semibold leading-[1.02] text-bon-100 sm:text-6xl lg:text-7xl">
+						BON Management construye el backend que convierte atencion en ingresos.
+					</h1>
+					<p class="mt-7 max-w-2xl text-lg leading-8 text-bon-100/68">
+						Marketing, branding, viralidad, chatting y management coordinados como un sistema. La creadora mantiene el control de su imagen; el equipo ejecuta la operacion que hace crecer el negocio.
+					</p>
+					<div class="mt-9 flex flex-col gap-3 sm:flex-row">
+						<a
+							class="focus-ring rounded-full bg-bon-coral px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-bon-gold hover:text-bon-950"
+							href="#aplicar"
+						>
+							Solicitar auditoria
+						</a>
+						<a
+							class="focus-ring rounded-full border border-white/14 px-6 py-3 text-center text-sm font-semibold text-bon-100 transition hover:border-bon-mint hover:text-bon-mint"
+							href="#servicios"
+						>
+							Ver servicios
+						</a>
+					</div>
+				</div>
+
+				<div class="surface-line relative rounded-[8px] bg-white/[0.04] p-4" data-reveal>
+					<div class="grid gap-3">
+						<div class="rounded-[6px] bg-bon-100 p-5 text-bon-950">
+							<p class="text-sm font-semibold text-bon-coral">Growth dashboard</p>
+							<div class="mt-7 grid grid-cols-2 gap-4">
+								<div>
+									<p class="text-4xl font-semibold"><span data-counter="38">0</span>%</p>
+									<p class="mt-1 text-sm text-bon-950/60">Retencion objetivo</p>
+								</div>
+								<div>
+									<p class="text-4xl font-semibold"><span data-counter="4">0</span>x</p>
+									<p class="mt-1 text-sm text-bon-950/60">Tests de contenido</p>
+								</div>
+							</div>
+						</div>
+						<div class="grid grid-cols-2 gap-3">
+							<div class="rounded-[6px] bg-bon-800 p-5">
+								<p class="text-sm text-bon-100/55">Traffic systems</p>
+								<p class="mt-4 text-2xl font-semibold text-bon-mint">Multi-platform</p>
+							</div>
+							<div class="rounded-[6px] bg-bon-800 p-5">
+								<p class="text-sm text-bon-100/55">Monetization</p>
+								<p class="mt-4 text-2xl font-semibold text-bon-gold">LTV first</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="sistema" class="px-5 py-24 sm:px-8">
+			<div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+				<div data-reveal>
+					<p class="text-sm font-semibold uppercase text-bon-mint">Sistema</p>
+					<h2 class="mt-4 text-4xl font-semibold text-balance text-bon-100 sm:text-5xl">
+						No vendemos gestion. Instalamos una operacion de crecimiento.
+					</h2>
+				</div>
+				<div class="grid gap-4 sm:grid-cols-3" data-reveal>
+					<div class="surface-line rounded-[8px] bg-white/[0.04] p-6">
+						<p class="text-3xl font-semibold text-bon-gold">01</p>
+						<p class="mt-5 text-bon-100/72">Adquisicion constante desde redes y colaboraciones.</p>
+					</div>
+					<div class="surface-line rounded-[8px] bg-white/[0.04] p-6">
+						<p class="text-3xl font-semibold text-bon-coral">02</p>
+						<p class="mt-5 text-bon-100/72">Conversion y retencion dentro de OnlyFans.</p>
+					</div>
+					<div class="surface-line rounded-[8px] bg-white/[0.04] p-6">
+						<p class="text-3xl font-semibold text-bon-mint">03</p>
+						<p class="mt-5 text-bon-100/72">Lectura de datos para escalar sin improvisar.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="servicios" class="px-5 py-24 sm:px-8">
+			<div class="mx-auto max-w-7xl">
+				<div class="max-w-3xl" data-reveal>
+					<p class="text-sm font-semibold uppercase text-bon-coral">Servicios</p>
+					<h2 class="mt-4 text-4xl font-semibold text-balance text-bon-100 sm:text-5xl">
+						Un equipo para cada parte del negocio de la creadora.
+					</h2>
+				</div>
+				<div class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+					{services.map((service) => (
+						<article class="surface-line rounded-[8px] bg-white/[0.04] p-6" data-reveal>
+							<h3 class="text-xl font-semibold text-bon-100">{service.title}</h3>
+							<p class="mt-4 leading-7 text-bon-100/64">{service.text}</p>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section id="proceso" class="px-5 py-24 sm:px-8">
+			<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+				<div data-reveal>
+					<p class="text-sm font-semibold uppercase text-bon-gold">Proceso</p>
+					<h2 class="mt-4 text-4xl font-semibold text-balance text-bon-100 sm:text-5xl">
+						Una web de scroll debe vender claridad, no ruido.
+					</h2>
+					<p class="mt-6 text-lg leading-8 text-bon-100/64">
+						Esta base ya esta preparada para contar la historia por bloques, activar animaciones al entrar en viewport y convertir cada seccion en un argumento comercial.
+					</p>
+				</div>
+				<div class="space-y-4">
+					{steps.map((step, index) => (
+						<div class="surface-line flex gap-5 rounded-[8px] bg-white/[0.04] p-5" data-reveal>
+							<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bon-100 text-sm font-semibold text-bon-950">
+								{String(index + 1).padStart(2, '0')}
+							</span>
+							<p class="pt-2 leading-7 text-bon-100/72">{step}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section id="aplicar" class="px-5 py-24 sm:px-8">
+			<div class="surface-line mx-auto grid max-w-7xl gap-8 rounded-[8px] bg-bon-100 p-6 text-bon-950 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
+				<div data-reveal>
+					<p class="text-sm font-semibold uppercase text-bon-coral">Siguiente paso</p>
+					<h2 class="mt-3 max-w-3xl text-4xl font-semibold text-balance sm:text-5xl">
+						Preparada la base tecnica. Ahora toca definir marca, copy y visuales.
+					</h2>
+				</div>
+				<a
+					class="focus-ring inline-flex justify-center rounded-full bg-bon-950 px-6 py-3 text-sm font-semibold text-bon-100 transition hover:bg-bon-coral"
+					href="mailto:hello@bonmanagement.com"
+					data-reveal
+				>
+					Contactar
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		import { gsap } from 'gsap';
+		import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		const animateCounter = (element: HTMLElement) => {
+			const target = Number(element.dataset.counter ?? '0');
+			const value = { current: 0 };
+
+			gsap.to(value, {
+				current: target,
+				duration: 1.4,
+				ease: 'power2.out',
+				onUpdate: () => {
+					element.textContent = Math.round(value.current).toString();
+				},
+			});
+		};
+
+		const initAnimations = () => {
+			if (!reduceMotion) {
+				gsap.utils.toArray('[data-reveal]').forEach((element) => {
+					gsap.fromTo(
+						element,
+						{ autoAlpha: 0, y: 36 },
+						{
+							autoAlpha: 1,
+							duration: 0.9,
+							ease: 'power3.out',
+							y: 0,
+							scrollTrigger: {
+								trigger: element,
+								start: 'top 82%',
+							},
+						},
+					);
+				});
+
+				ScrollTrigger.refresh();
+			}
+
+			gsap.utils.toArray('[data-counter]').forEach((element) => {
+				const counter = element as HTMLElement;
+				const target = Number((element as HTMLElement).dataset.counter ?? '0');
+
+				if (reduceMotion) {
+					counter.textContent = String(target);
+					return;
+				}
+
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								animateCounter(counter);
+								observer.unobserve(counter);
+							}
+						});
+					},
+					{ threshold: 0.45 },
+				);
+
+				observer.observe(counter);
+			});
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initAnimations, { once: true });
+		} else {
+			initAnimations();
+		}
+	</script>
+</BaseLayout>

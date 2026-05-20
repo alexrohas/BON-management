@@ -1,43 +1,31 @@
-# Astro Starter Kit: Minimal
+# BON Management
 
-```sh
-npm create astro@latest -- --template minimal
+Base tecnica para una landing profesional de scroll orientada a una agencia de OnlyFans management.
+
+## Stack
+
+- Astro 6 con TypeScript estricto.
+- Tailwind CSS 4 mediante `@tailwindcss/vite`.
+- GSAP + ScrollTrigger para animaciones vinculadas al scroll.
+- React configurado como isla opcional para componentes interactivos.
+- Lucide React preparado para iconos cuando se construyan controles o CTAs.
+
+## Comandos
+
+```bash
+npm install
+npm run dev
+npm run build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Estructura
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```txt
+src/
+  layouts/BaseLayout.astro
+  pages/index.astro
+  styles/global.css
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+La pagina inicial ya incluye secciones de hero, sistema, servicios, proceso y CTA para validar el flujo visual antes de entrar en identidad final, copywriting y assets.
