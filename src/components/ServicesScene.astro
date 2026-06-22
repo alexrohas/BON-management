@@ -1,0 +1,174 @@
+<div class="services-scene" data-services-scene aria-hidden="true">
+	<canvas></canvas>
+	<div class="services-scene__fallback">
+		<span></span><span></span><span></span>
+	</div>
+</div>
+
+<script>
+	import {
+		ACESFilmicToneMapping,
+		CatmullRomCurve3,
+		DirectionalLight,
+		Group,
+		HemisphereLight,
+		Mesh,
+		MeshPhysicalMaterial,
+		MeshStandardMaterial,
+		PerspectiveCamera,
+		Scene,
+		SphereGeometry,
+		SRGBColorSpace,
+		TubeGeometry,
+		Vector3,
+		WebGLRenderer,
+	} from 'three';
+	import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
+
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	document.querySelectorAll<HTMLElement>('[data-services-scene]').forEach((container) => {
+		if (container.dataset.ready === 'true') return;
+		container.dataset.ready = 'true';
+
+		const canvas = container.querySelector('canvas');
+		if (!canvas) return;
+
+		try {
+			const scene = new Scene();
+			const camera = new PerspectiveCamera(35, 1, 0.1, 50);
+			camera.position.set(0, 2.4, 8.8);
+			camera.lookAt(0, 0, 0);
+
+			const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+			renderer.outputColorSpace = SRGBColorSpace;
+			renderer.toneMapping = ACESFilmicToneMapping;
+			renderer.toneMappingExposure = 1.12;
+
+			const acrylic = new MeshPhysicalMaterial({
+				color: 0xe2a0ae,
+				transparent: true,
+				opacity: 0.56,
+				transmission: 0.78,
+				thickness: 0.48,
+				roughness: 0.08,
+				clearcoat: 1,
+			});
+			const black = new MeshStandardMaterial({ color: 0x0b0b0d, roughness: 0.2, metalness: 0.52 });
+
+			const group = new Group();
+			group.rotation.set(-0.16, -0.36, 0.02);
+			scene.add(group);
+
+			for (let index = 0; index < 4; index += 1) {
+				const slab = new Mesh(new RoundedBoxGeometry(3.1, 0.24, 2.65, 6, 0.12), acrylic);
+				slab.position.y = -0.95 + index * 0.5;
+				slab.rotation.y = index * 0.025;
+				group.add(slab);
+			}
+
+			const sphere = new Mesh(new SphereGeometry(0.72, 48, 48), black);
+			sphere.position.set(0.25, 1.2, 0.1);
+			group.add(sphere);
+
+			const ribbonCurve = new CatmullRomCurve3([
+				new Vector3(-3.4, -0.65, 0.8),
+				new Vector3(-2.1, 0.25, 1.05),
+				new Vector3(-0.75, 0.1, 1.25),
+				new Vector3(0.65, -0.35, 1.1),
+				new Vector3(2.25, -1.0, 0.7),
+				new Vector3(3.6, -1.35, 0.4),
+			]);
+			const ribbon = new Mesh(new TubeGeometry(ribbonCurve, 96, 0.13, 12, false), black);
+			group.add(ribbon);
+
+			const key = new DirectionalLight(0xffffff, 4.5);
+			key.position.set(-4, 7, 6);
+			scene.add(key);
+			const pinkLight = new DirectionalLight(0xf0aebc, 2.2);
+			pinkLight.position.set(5, 2, 4);
+			scene.add(pinkLight);
+			scene.add(new HemisphereLight(0xffffff, 0xe7b8c1, 2));
+
+			let isVisible = true;
+			const resize = () => {
+				const width = Math.max(container.clientWidth, 1);
+				const height = Math.max(container.clientHeight, 1);
+				renderer.setSize(width, height, false);
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+			};
+
+			new ResizeObserver(resize).observe(container);
+			new IntersectionObserver(([entry]) => {
+				isVisible = entry.isIntersecting;
+			}).observe(container);
+
+			const startedAt = Date.now();
+			const animate = () => {
+				requestAnimationFrame(animate);
+				if (!isVisible) return;
+				if (!reducedMotion) {
+					const elapsed = (Date.now() - startedAt) / 1000;
+					group.rotation.y = -0.36 + Math.sin(elapsed * 0.45) * 0.08;
+					group.position.y = Math.sin(elapsed * 0.65) * 0.06;
+				}
+				renderer.render(scene, camera);
+			};
+
+			resize();
+			canvas.style.opacity = '1';
+			const fallback = container.querySelector<HTMLElement>('.services-scene__fallback');
+			if (fallback) fallback.style.opacity = '0';
+			animate();
+		} catch {
+			container.classList.add('has-fallback');
+		}
+	});
+</script>
+
+<style>
+	.services-scene {
+		position: relative;
+		width: 100%;
+		height: 30rem;
+	}
+
+	.services-scene canvas,
+	.services-scene__fallback {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.services-scene canvas {
+		opacity: 0;
+	}
+
+	.services-scene__fallback {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.services-scene__fallback span {
+		position: absolute;
+		width: 12rem;
+		height: 8rem;
+		border: 1px solid rgba(184, 111, 128, 0.42);
+		background: rgba(237, 203, 211, 0.35);
+		box-shadow: 0 18px 45px rgba(72, 39, 47, 0.12);
+	}
+
+	.services-scene__fallback span:nth-child(1) { transform: translateY(1.4rem); }
+	.services-scene__fallback span:nth-child(2) { transform: translateY(0.4rem); }
+	.services-scene__fallback span:nth-child(3) { transform: translateY(-0.6rem); }
+
+	@media (max-width: 1023px) {
+		.services-scene {
+			height: 22rem;
+		}
+	}
+</style>

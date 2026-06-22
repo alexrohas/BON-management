@@ -1,0 +1,57 @@
+---
+interface Props {
+	variant?: 'black' | 'white';
+	class?: string;
+	width?: string;
+}
+
+const { variant = 'black', class: className = '', width = '13.75rem' } = Astro.props;
+---
+
+<span
+	class:list={['brand-logo', variant === 'white' && 'brand-logo--white', className]}
+	style={`--brand-logo-width: ${width}`}
+	aria-label="BON Management, OFM Marketing"
+>
+	<svg viewBox="27 213 448 61" role="img" aria-hidden="true">
+		<defs>
+			<filter id="extract-bon-logo" color-interpolation-filters="sRGB">
+				<feColorMatrix
+					type="matrix"
+					values="
+						0 0 0 0 0
+						0 0 0 0 0
+						0 0 0 0 0
+						28.333 0 0 0 -27.333"
+				/>
+			</filter>
+		</defs>
+		<image
+			href="/brand/bon-management-source.png"
+			x="0"
+			y="0"
+			width="500"
+			height="500"
+			filter="url(#extract-bon-logo)"
+			preserveAspectRatio="xMidYMid meet"
+		/>
+	</svg>
+</span>
+
+<style>
+	.brand-logo {
+		display: inline-block;
+		width: var(--brand-logo-width);
+		color: #0b0b0d;
+	}
+
+	.brand-logo svg {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.brand-logo--white {
+		filter: invert(1);
+	}
+</style>

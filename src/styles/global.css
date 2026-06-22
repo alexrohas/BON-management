@@ -1,18 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-	--font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--color-bon-950: #0f1f3c;
-	--color-bon-900: #173b6d;
-	--color-bon-800: #dff0ff;
-	--color-bon-100: #ffffff;
-	--color-bon-soft: #f7faff;
-	--color-bon-blue: #1a6dff;
-	--color-bon-sky: #38b6f6;
-	--color-bon-pink: #ff5a9d;
-	--color-bon-coral: #ff7a6b;
-	--color-bon-lilac: #9171ff;
-	--color-bon-line: #e2ecf7;
+	--font-sans: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+	--color-bon-black: #0b0b0d;
+	--color-bon-ink: #18171a;
+	--color-bon-muted: #666067;
+	--color-bon-pink: #d894a3;
+	--color-bon-rose: #b86f80;
+	--color-bon-blush: #f7e8ec;
+	--color-bon-blush-strong: #edcbd3;
+	--color-bon-line: #edd7dc;
+	--color-bon-white: #ffffff;
 }
 
 @layer base {
@@ -28,15 +26,14 @@
 	body {
 		margin: 0;
 		min-height: 100vh;
-		background:
-			radial-gradient(ellipse 80% 50% at 10% 5%, rgba(56, 182, 246, 0.12), transparent 50%),
-			radial-gradient(ellipse 70% 40% at 90% 8%, rgba(255, 90, 157, 0.08), transparent 45%),
-			radial-gradient(ellipse 50% 30% at 50% 90%, rgba(145, 113, 255, 0.05), transparent 40%),
-			linear-gradient(180deg, #ffffff 0%, #f7faff 50%, #ffffff 100%);
-		color: var(--color-bon-950);
+		background: #ffffff;
+		color: var(--color-bon-black);
 		font-family: var(--font-sans);
 		text-rendering: geometricPrecision;
-		-webkit-font-smoothing: antialiased;
+	}
+
+	section[id] {
+		scroll-margin-top: 5rem;
 	}
 
 	a {
@@ -51,14 +48,16 @@
 		font: inherit;
 	}
 
-	img {
-		max-width: 100%;
+	img,
+	canvas,
+	svg {
 		display: block;
+		max-width: 100%;
 	}
 
 	::selection {
-		background: var(--color-bon-blue);
-		color: white;
+		background: var(--color-bon-blush-strong);
+		color: var(--color-bon-black);
 	}
 }
 
@@ -67,26 +66,31 @@
 		text-wrap: balance;
 	}
 
-	.surface-line {
-		border: 1px solid rgba(23, 59, 109, 0.08);
-		box-shadow: 
-			0 1px 2px rgba(16, 36, 63, 0.04),
-			0 12px 40px rgba(16, 36, 63, 0.06);
-	}
-
-	.soft-grid {
-		background-image:
-			linear-gradient(rgba(26, 109, 255, 0.04) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(26, 109, 255, 0.04) 1px, transparent 1px);
-		background-size: 40px 40px;
-	}
-
 	.focus-ring {
 		outline: 2px solid transparent;
-		outline-offset: 2px;
+		outline-offset: 3px;
 	}
 
 	.focus-ring:focus-visible {
-		outline-color: var(--color-bon-blue);
+		outline-color: var(--color-bon-rose);
+	}
+
+	.pink-rule {
+		background: var(--color-bon-pink);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
 	}
 }

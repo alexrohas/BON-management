@@ -1,292 +1,276 @@
 ---
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import BrandLogo from '../components/BrandLogo.astro';
+import HeroScene from '../components/HeroScene.astro';
+import ServicesScene from '../components/ServicesScene.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header';
-import ServiceCard from '../components/ServiceCard';
-import PillarCard from '../components/PillarCard';
-import ProcessStep from '../components/ProcessStep';
-import CtaSection from '../components/CtaSection';
-
-const services = [
-	{
-		icon: 'traffic' as const,
-		kicker: 'Traffic',
-		title: 'Marketing en redes sociales',
-		text: 'Contenido, calendario y distribucion en plataformas clave para atraer una audiencia que ya llega preparada para convertir.',
-	},
-	{
-		icon: 'strategy' as const,
-		kicker: 'Strategy',
-		title: 'Optimizacion de estrategia',
-		text: 'Revision de precios, embudos, PPV, retencion y comportamiento de fans para mejorar ingresos con datos reales.',
-	},
-	{
-		icon: 'brand' as const,
-		kicker: 'Brand',
-		title: 'Desarrollo de branding',
-		text: 'Posicionamiento, tono, imagen y narrativa para que la creadora tenga una marca reconocible, deseable y consistente.',
-	},
-	{
-		icon: 'scale' as const,
-		kicker: 'Scale',
-		title: 'Sistemas de escalado',
-		text: 'Testing de hooks, lectura de senales, expansion multi-cuenta y rutinas semanales para multiplicar lo que funciona.',
-	},
-	{
-		icon: 'chat' as const,
-		kicker: 'Chat',
-		title: 'Chatting en OnlyFans',
-		text: 'Conversaciones, upsells, renovaciones y retencion gestionadas con protocolos que protegen la marca personal.',
-	},
-	{
-		icon: 'ops' as const,
-		kicker: 'Ops',
-		title: 'Management integral',
-		text: 'Planificacion, reporting, equipo operativo y seguimiento de KPIs para que la creadora pueda centrarse en crear.',
-	},
-];
 
 const pillars = [
 	{
-		value: '01',
-		title: 'Marca con criterio',
-		text: 'La creadora no se ve como una cuenta mas. Tiene una identidad clara, premium y facil de reconocer.',
-		accent: 'blue' as const,
+		number: '01',
+		title: 'Posicionamiento',
+		text: 'Una identidad clara que destaque sin perder autenticidad.',
 	},
 	{
-		value: '02',
-		title: 'Crecimiento medible',
-		text: 'Cada decision se conecta con trafico, conversion, retencion y valor del fan, no con intuiciones sueltas.',
-		accent: 'pink' as const,
+		number: '02',
+		title: 'Monetizacion',
+		text: 'Oferta, chatting y retencion conectados a objetivos reales.',
 	},
 	{
-		value: '03',
-		title: 'Operacion diaria',
-		text: 'Marketing, chatting y reporting trabajan coordinados para que el negocio avance todos los dias.',
-		accent: 'lilac' as const,
+		number: '03',
+		title: 'Escalado',
+		text: 'Contenido, distribucion y decisiones guiadas por datos.',
 	},
 ];
 
-const steps = [
-	'Auditoria inicial de marca, contenido, trafico y monetizacion actual.',
-	'Direccion visual, definicion de oferta, precios y calendario de crecimiento.',
-	'Ejecucion de marketing, chatting, optimizacion continua y reporting semanal.',
-	'Escalado con pruebas semanales y decisiones estrategicas basadas en datos.',
+const services = [
+	{
+		number: '01',
+		title: 'Marketing en redes sociales',
+		text: 'Estrategias de contenido que conectan, convierten y construyen audiencia.',
+	},
+	{
+		number: '02',
+		title: 'Optimizacion de estrategia',
+		text: 'Ajustamos, probamos y escalamos lo que funciona para tu marca.',
+	},
+	{
+		number: '03',
+		title: 'Desarrollo de branding',
+		text: 'Identidad visual y posicionamiento para diferenciarte con criterio.',
+	},
+	{
+		number: '04',
+		title: 'Escalado y viralidad',
+		text: 'Multiplicamos tu alcance con sistemas de distribucion medibles.',
+	},
+	{
+		number: '05',
+		title: 'Chatting en OnlyFans',
+		text: 'Maximizamos conversion y retencion con interaccion estrategica.',
+	},
+	{
+		number: '06',
+		title: 'Management integral',
+		text: 'Gestion completa para que puedas enfocarte en crear y liderar.',
+	},
+];
+
+const process = [
+	{
+		number: '01',
+		title: 'Auditoria',
+		text: 'Analizamos tu presencia actual y detectamos oportunidades reales de crecimiento.',
+	},
+	{
+		number: '02',
+		title: 'Estrategia',
+		text: 'Disenamos un plan alineado a tus objetivos, tu audiencia y tu posicionamiento.',
+	},
+	{
+		number: '03',
+		title: 'Ejecucion',
+		text: 'Activamos contenido, chatting, optimizacion y reporting de forma coordinada.',
+	},
+	{
+		number: '04',
+		title: 'Escalado',
+		text: 'Medimos, optimizamos y multiplicamos lo que funciona para tu marca.',
+	},
 ];
 ---
 
-<BaseLayout>
-	<Header client:load />
+<BaseLayout
+	title="BON Management | Estrategia y crecimiento para creadoras"
+	description="Marketing, branding, chatting y management para creadoras que quieren convertir su audiencia en un negocio escalable."
+>
+	<header class="fixed inset-x-0 top-0 z-50 border-b border-black/8 bg-white/92 backdrop-blur-xl">
+		<div class="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 sm:px-8 lg:px-12">
+			<a class="focus-ring shrink-0" href="#inicio" aria-label="BON Management, inicio">
+				<BrandLogo width="12rem" />
+			</a>
 
-	<main class="overflow-hidden">
-		<!-- Hero Section -->
-		<section id="inicio" class="soft-grid relative min-h-screen px-5 pb-24 pt-28 sm:px-8 lg:pt-32">
-			<!-- Decorative blurs - hidden on mobile for performance -->
-			<div class="pointer-events-none absolute left-[5%] top-[10%] hidden h-96 w-96 rounded-full bg-bon-sky/15 blur-[100px] md:block"></div>
-			<div class="pointer-events-none absolute right-[10%] top-[20%] hidden h-80 w-80 rounded-full bg-bon-pink/10 blur-[80px] md:block"></div>
-			<div class="pointer-events-none absolute bottom-[20%] left-[40%] hidden h-64 w-64 rounded-full bg-bon-lilac/8 blur-[60px] md:block"></div>
+			<nav class="hidden items-center gap-10 text-sm font-medium text-bon-ink md:flex" aria-label="Principal">
+				<a class="transition-colors hover:text-bon-rose" href="#servicios">Servicios</a>
+				<a class="transition-colors hover:text-bon-rose" href="#sistema">Sistema</a>
+				<a class="transition-colors hover:text-bon-rose" href="#proceso">Proceso</a>
+			</nav>
 
-			<div class="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-				<div data-reveal>
-					<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-bon-blue/15 bg-white/80 px-5 py-2.5 shadow-sm">
-						<span class="h-2 w-2 animate-pulse rounded-full bg-bon-blue"></span>
-						<span class="text-sm font-medium text-bon-950/70">OnlyFans Management para creadoras que quieren crecer en serio</span>
-					</div>
+			<a
+				class="focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-[4px] bg-bon-black px-5 text-sm font-semibold text-white transition-colors hover:bg-bon-rose"
+				href="#aplicar"
+			>
+				Aplicar
+				<ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+			</a>
+		</div>
+	</header>
 
-					<h1 class="max-w-2xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-bon-950 sm:text-5xl lg:text-6xl xl:text-7xl">
-						Convierte tu marca personal en un
-						<span class="bg-gradient-to-r from-bon-blue via-bon-sky to-bon-blue bg-clip-text text-transparent">negocio escalable</span>
+	<main>
+		<section id="inicio" class="relative overflow-hidden pt-20">
+			<div class="absolute left-0 top-20 h-44 w-3 bg-bon-pink sm:w-5" aria-hidden="true"></div>
+			<div class="mx-auto grid min-h-[82svh] max-w-[90rem] items-center px-5 py-12 sm:px-8 lg:grid-cols-2 lg:px-12 lg:py-8">
+				<div class="relative z-10 max-w-2xl py-8 lg:translate-y-5" data-reveal>
+					<h1 class="text-balance text-5xl font-medium leading-[1.02] text-bon-black sm:text-6xl lg:text-7xl">
+						Tu marca.<br />Tu crecimiento.<br />Nuestro sistema.
 					</h1>
-
-					<p class="mt-7 max-w-xl text-lg leading-relaxed text-bon-950/65 sm:text-xl">
-						Marketing, branding, viralidad, chatting y management coordinados para que puedas crecer en OnlyFans con una estructura profesional detras de tu contenido.
+					<p class="mt-7 max-w-xl text-lg leading-8 text-bon-muted sm:text-xl">
+						Marketing, branding, chatting y management para creadoras que quieren convertir su audiencia en un negocio escalable.
 					</p>
-
-					<div class="mt-10 flex flex-col gap-4 sm:flex-row">
+					<div class="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
 						<a
-							class="focus-ring group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-bon-blue to-bon-blue px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-bon-blue/25 transition-all duration-300 hover:gap-3 hover:from-bon-pink hover:to-bon-coral hover:shadow-bon-pink/25"
+							class="focus-ring inline-flex min-h-13 items-center justify-center gap-3 rounded-[4px] bg-bon-black px-6 text-sm font-semibold text-white transition-colors hover:bg-bon-rose"
 							href="#aplicar"
 						>
 							Solicitar auditoria
-							<svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-							</svg>
+							<ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
 						</a>
-						<a
-							class="focus-ring rounded-full border border-bon-line bg-white/80 px-8 py-4 text-center text-sm font-semibold text-bon-950 backdrop-blur transition-all duration-300 hover:border-bon-blue/30 hover:bg-white hover:text-bon-blue hover:shadow-lg"
-							href="#servicios"
-						>
-							Ver servicios
+						<a class="focus-ring border-b border-bon-black pb-1 text-sm font-semibold transition-colors hover:border-bon-rose hover:text-bon-rose" href="#sistema">
+							Descubrir el sistema
 						</a>
 					</div>
+				</div>
 
-					<!-- Stats -->
-					<div class="mt-14 grid max-w-lg grid-cols-3 gap-4">
-						<div class="group rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-bon-line/60 transition-all duration-300 hover:bg-white hover:shadow-md">
-							<p class="text-3xl font-bold text-bon-blue">
-								+<span data-counter="38">0</span>%
+				<div class="relative min-h-[20rem] lg:h-[calc(82svh-5rem)] lg:min-h-[38rem]" data-reveal>
+					<HeroScene />
+				</div>
+			</div>
+		</section>
+
+		<section id="sistema" class="relative">
+			<div class="bg-bon-blush">
+				<div class="mx-auto grid max-w-[90rem] gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[12rem_1fr] lg:px-12 lg:py-20">
+					<div class="hidden border-l-[4rem] border-bon-pink/55 lg:block" aria-hidden="true"></div>
+					<div class="max-w-4xl" data-reveal>
+						<h2 class="text-balance text-4xl font-medium leading-tight text-bon-black sm:text-5xl lg:text-6xl">No trabajamos para todas.</h2>
+						<p class="mt-5 max-w-2xl text-lg leading-8 text-bon-muted sm:text-xl">
+							Trabajamos con creadoras que quieren construir una marca rentable, sostenible y con direccion.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="relative overflow-hidden bg-white">
+				<div class="mx-auto grid max-w-[90rem] gap-12 px-5 pb-32 pt-20 sm:px-8 md:grid-cols-3 lg:px-12 lg:pb-40">
+					{pillars.map((pillar) => (
+						<article class="relative z-10 max-w-sm" data-reveal>
+							<p class="text-2xl font-medium text-bon-pink">{pillar.number}</p>
+							<h3 class="mt-4 text-2xl font-medium text-bon-black sm:text-3xl">{pillar.title}</h3>
+							<p class="mt-4 text-base leading-7 text-bon-muted">{pillar.text}</p>
+						</article>
+					))}
+				</div>
+
+				<svg class="pointer-events-none absolute inset-x-0 bottom-4 h-32 w-full sm:h-44" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M-40 112 C 130 205, 270 22, 470 112 S 820 202, 1010 101 S 1280 20, 1490 112" fill="none" stroke="#0b0b0d" stroke-width="28" stroke-linecap="round" />
+					<rect x="365" y="35" width="120" height="128" rx="6" fill="#edcbd3" fill-opacity="0.34" stroke="#d894a3" stroke-opacity="0.7" stroke-width="3" />
+					<rect x="920" y="28" width="120" height="128" rx="6" fill="#edcbd3" fill-opacity="0.34" stroke="#d894a3" stroke-opacity="0.7" stroke-width="3" />
+				</svg>
+			</div>
+		</section>
+
+		<section id="servicios" class="relative border-t border-bon-line bg-white">
+			<div class="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+				<div class="grid gap-8 lg:grid-cols-[7rem_1fr]">
+					<div class="hidden h-48 w-10 bg-bon-pink/55 lg:block" aria-hidden="true"></div>
+					<div data-reveal>
+						<p class="text-sm font-semibold text-bon-rose">Servicios</p>
+						<div class="mt-5 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+							<h2 class="max-w-3xl text-balance text-4xl font-medium leading-tight text-bon-black sm:text-5xl">
+								Un sistema completo para creadoras que lideran.
+							</h2>
+							<p class="max-w-xl text-lg leading-8 text-bon-muted">
+								Acompanamos cada etapa de tu marca con estrategia, estructura y ejecucion alineadas a tus objetivos.
 							</p>
-							<p class="mt-2 text-xs font-medium text-bon-950/50">Retencion objetivo</p>
-						</div>
-						<div class="group rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-bon-line/60 transition-all duration-300 hover:bg-white hover:shadow-md">
-							<p class="text-3xl font-bold text-bon-pink">
-								<span data-counter="4">0</span>x
-							</p>
-							<p class="mt-2 text-xs font-medium text-bon-950/50">Tests semanales</p>
-						</div>
-						<div class="group rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-bon-line/60 transition-all duration-300 hover:bg-white hover:shadow-md">
-							<p class="text-3xl font-bold text-bon-lilac">24/7</p>
-							<p class="mt-2 text-xs font-medium text-bon-950/50">Operacion activa</p>
 						</div>
 					</div>
 				</div>
 
-				<!-- Hero Visual -->
-				<div class="relative" data-reveal>
-					<!-- Floating decorative elements - hidden on mobile -->
-					<div class="pointer-events-none absolute -left-6 top-8 hidden h-24 w-24 rounded-full bg-bon-pink/20 blur-2xl md:block"></div>
-					<div class="pointer-events-none absolute -right-8 bottom-12 hidden h-32 w-32 rounded-full bg-bon-sky/25 blur-2xl md:block"></div>
-
-					<div class="surface-line relative overflow-hidden rounded-3xl bg-white p-3 sm:p-4">
-						<img
-							class="h-[28rem] w-full rounded-2xl object-cover object-center sm:h-[34rem]"
-							src="/images/creator-studio.jpg"
-							alt="Creadora de contenido trabajando en un estudio luminoso con su ordenador"
-						/>
-
-						<!-- Floating cards -->
-						<div class="absolute bottom-8 left-4 right-4 grid gap-3 sm:bottom-10 sm:left-8 sm:right-8 sm:grid-cols-2">
-							<div class="rounded-2xl bg-white/95 p-5 shadow-2xl backdrop-blur-sm">
-								<div class="flex items-center gap-3">
-									<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-bon-blue/10">
-										<svg class="h-5 w-5 text-bon-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-										</svg>
-									</div>
-									<div>
-										<p class="text-[10px] font-bold uppercase tracking-wider text-bon-blue">Traffic systems</p>
-										<p class="text-lg font-semibold text-bon-950">Multi-channel</p>
-									</div>
-								</div>
-							</div>
-							<div class="rounded-2xl bg-bon-950/95 p-5 text-white shadow-2xl backdrop-blur-sm">
-								<div class="flex items-center gap-3">
-									<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-bon-sky/20">
-										<svg class="h-5 w-5 text-bon-sky" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-										</svg>
-									</div>
-									<div>
-										<p class="text-[10px] font-bold uppercase tracking-wider text-bon-sky">Monetization</p>
-										<p class="text-lg font-semibold">LTV first</p>
-									</div>
-								</div>
-							</div>
-						</div>
+				<div class="mt-16 grid items-center gap-x-10 lg:grid-cols-[1fr_24rem_1fr]">
+					<div>
+					{services.slice(0, 3).map((service) => (
+						<a class="group grid grid-cols-[2.5rem_1fr_auto] gap-4 border-b border-bon-line py-7" href="#aplicar" data-reveal>
+							<span class="text-base font-medium text-bon-pink">{service.number}</span>
+							<span>
+								<strong class="block text-xl font-medium text-bon-black transition-colors group-hover:text-bon-rose sm:text-2xl">{service.title}</strong>
+								<span class="mt-2 block max-w-lg text-sm leading-6 text-bon-muted">{service.text}</span>
+							</span>
+							<ArrowUpRight className="mt-1 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" size={21} strokeWidth={1.5} aria-hidden="true" />
+						</a>
+					))}
+					</div>
+					<ServicesScene />
+					<div>
+					{services.slice(3).map((service) => (
+						<a class="group grid grid-cols-[2.5rem_1fr_auto] gap-4 border-b border-bon-line py-7" href="#aplicar" data-reveal>
+							<span class="text-base font-medium text-bon-pink">{service.number}</span>
+							<span>
+								<strong class="block text-xl font-medium text-bon-black transition-colors group-hover:text-bon-rose sm:text-2xl">{service.title}</strong>
+								<span class="mt-2 block max-w-lg text-sm leading-6 text-bon-muted">{service.text}</span>
+							</span>
+							<ArrowUpRight className="mt-1 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" size={21} strokeWidth={1.5} aria-hidden="true" />
+						</a>
+					))}
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Sistema Section -->
-		<section id="sistema" class="bg-white px-5 py-28 sm:px-8">
-			<div class="mx-auto max-w-7xl">
-				<div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
-					<div class="lg:sticky lg:top-32" data-reveal>
-						<p class="inline-flex rounded-full bg-bon-pink/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-bon-pink">
-							Sistema
-						</p>
-						<h2 class="mt-6 text-balance text-3xl font-semibold leading-tight text-bon-950 sm:text-4xl lg:text-5xl">
-							Una estructura pensada para creadoras, no una agencia que solo promete alcance.
-						</h2>
-						<p class="mt-6 text-lg leading-relaxed text-bon-950/60">
-							Combinamos branding, marketing, operaciones y datos en un sistema integrado que trabaja para ti las 24 horas.
-						</p>
-					</div>
-
-					<div class="grid gap-5 sm:grid-cols-3">
-						{pillars.map((pillar) => (
-							<PillarCard {...pillar} client:visible />
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Servicios Section -->
-		<section id="servicios" class="px-5 py-28 sm:px-8">
-			<div class="mx-auto max-w-7xl">
-				<div class="max-w-3xl" data-reveal>
-					<p class="inline-flex rounded-full bg-bon-blue/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-bon-blue">
-						Servicios
-					</p>
-					<h2 class="mt-6 text-balance text-3xl font-semibold leading-tight text-bon-950 sm:text-4xl lg:text-5xl">
-						Todo lo que necesita una creadora para pasar de improvisar a operar con estrategia.
-					</h2>
-					<p class="mt-6 max-w-2xl text-lg leading-relaxed text-bon-950/60">
-						Cada servicio esta disenado para integrarse con los demas y crear un ecosistema de crecimiento coherente.
-					</p>
+		<section id="proceso" class="relative overflow-hidden border-t border-bon-line bg-white">
+			<div class="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+				<div class="max-w-4xl" data-reveal>
+					<p class="text-sm font-semibold text-bon-rose">Proceso</p>
+					<h2 class="mt-5 text-balance text-4xl font-medium leading-tight text-bon-black sm:text-5xl">Un proceso claro. Un equipo detras.</h2>
+					<p class="mt-5 max-w-2xl text-lg leading-8 text-bon-muted">Metodologia simple, comunicacion constante y acciones alineadas a tus objetivos.</p>
 				</div>
 
-				<div class="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-					{services.map((service) => (
-						<ServiceCard {...service} client:visible />
+				<div class="relative mt-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+					<div class="absolute left-0 right-0 top-[3.25rem] hidden h-px bg-bon-pink/75 lg:block" aria-hidden="true"></div>
+					{process.map((step) => (
+						<article class="relative" data-reveal>
+							<p class="text-xl font-medium text-bon-pink">{step.number}</p>
+							<span class="mt-8 hidden h-3 w-3 bg-bon-pink lg:block" aria-hidden="true"></span>
+							<h3 class="mt-6 text-2xl font-medium text-bon-black">{step.title}</h3>
+							<p class="mt-4 text-sm leading-6 text-bon-muted">{step.text}</p>
+						</article>
 					))}
 				</div>
 			</div>
+
+			<div class="relative h-28" aria-hidden="true">
+				<div class="absolute left-[-5%] right-[-5%] top-10 h-7 rotate-2 rounded-full bg-bon-black shadow-[0_12px_26px_rgba(11,11,13,0.18)]"></div>
+				<div class="absolute left-1/2 top-0 h-28 w-28 -translate-x-1/2 rounded-[8px] border-4 border-bon-pink/65 bg-bon-blush/55 shadow-[0_18px_40px_rgba(184,111,128,0.18)]"></div>
+			</div>
 		</section>
 
-		<!-- Proceso Section -->
-		<section id="proceso" class="bg-white px-5 py-28 sm:px-8">
-			<div class="mx-auto max-w-7xl">
-				<div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:gap-20">
-					<div class="lg:sticky lg:top-32" data-reveal>
-						<p class="inline-flex rounded-full bg-bon-lilac/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-bon-lilac">
-							Proceso
-						</p>
-						<h2 class="mt-6 text-balance text-3xl font-semibold leading-tight text-bon-950 sm:text-4xl lg:text-5xl">
-							De marca dispersa a sistema de crecimiento con foco comercial.
-						</h2>
-						<p class="mt-6 text-lg leading-relaxed text-bon-950/60">
-							El proceso guia a la creadora desde su situacion actual hasta una estructura escalable y rentable en cuatro fases claras.
-						</p>
-
-						<div class="mt-10 flex items-center gap-4">
-							<div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-bon-blue to-bon-sky text-white shadow-lg shadow-bon-blue/20">
-								<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-								</svg>
-							</div>
-							<div>
-								<p class="text-sm font-medium text-bon-950/50">Duracion estimada</p>
-								<p class="text-xl font-semibold text-bon-950">4-8 semanas</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="space-y-4">
-						{steps.map((step, index) => (
-							<ProcessStep number={index + 1} text={step} client:visible />
-						))}
-					</div>
+		<section id="aplicar" class="grid bg-bon-blush lg:grid-cols-[1fr_21rem]">
+			<div class="px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
+				<div class="mx-auto max-w-[69rem]" data-reveal>
+					<h2 class="max-w-3xl text-balance text-4xl font-medium leading-tight text-bon-black sm:text-5xl lg:text-6xl">Tu contenido ya tiene valor. Hagamos que crezca.</h2>
+					<p class="mt-5 max-w-xl text-lg leading-8 text-bon-muted">Solicita una auditoria y descubre que necesita tu marca para dar el siguiente paso.</p>
+					<a class="focus-ring mt-8 inline-flex min-h-13 items-center justify-center gap-3 rounded-[4px] bg-bon-black px-6 text-sm font-semibold text-white transition-colors hover:bg-bon-rose" href="mailto:hello@bonmanagement.com">
+						Aplicar ahora
+						<ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true" />
+					</a>
 				</div>
 			</div>
-		</section>
-
-		<!-- CTA Section -->
-		<CtaSection client:visible />
-
-		<!-- Footer -->
-		<footer class="border-t border-bon-line/60 bg-white px-5 py-12 sm:px-8">
-			<div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
-				<a class="text-lg font-bold tracking-[0.18em] text-bon-950" href="#inicio">
-					BON
-				</a>
-				<p class="text-sm text-bon-950/50">
-					&copy; {new Date().getFullYear()} BON Management. Todos los derechos reservados.
-				</p>
+			<div class="flex min-h-72 items-center justify-center bg-bon-black px-8 py-16">
+				<BrandLogo variant="white" width="15rem" />
 			</div>
-		</footer>
+		</section>
 	</main>
+
+	<footer class="border-t border-bon-line bg-white">
+		<div class="mx-auto flex max-w-[90rem] flex-col gap-6 px-5 py-8 text-sm text-bon-muted sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
+			<BrandLogo width="10.5rem" />
+			<div class="flex flex-wrap items-center gap-x-8 gap-y-3">
+				<a class="hover:text-bon-rose" href="#">Instagram</a>
+				<a class="hover:text-bon-rose" href="#">Privacidad</a>
+				<a class="hover:text-bon-rose" href="mailto:hello@bonmanagement.com">Contacto</a>
+				<span>2026</span>
+			</div>
+		</div>
+	</footer>
 
 	<script>
 		import { gsap } from 'gsap';
@@ -295,96 +279,35 @@ const steps = [
 		gsap.registerPlugin(ScrollTrigger);
 
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		const isMobile = window.innerWidth < 768;
 
-		const animateCounter = (element: HTMLElement) => {
-			const target = Number(element.dataset.counter ?? '0');
-			const value = { current: 0 };
+		const initRevealAnimations = () => {
+			if (reduceMotion) return;
 
-			gsap.to(value, {
-				current: target,
-				duration: 1.6,
-				ease: 'power3.out',
-				onUpdate: () => {
-					element.textContent = Math.round(value.current).toString();
-				},
-			});
-		};
-
-		const initAnimations = () => {
-			// Set initial visibility for reveal elements
-			const allReveals = document.querySelectorAll('[data-reveal]');
-
-			if (!reduceMotion) {
-				// Set initial state
-				gsap.set(allReveals, { autoAlpha: 0, y: isMobile ? 30 : 48 });
-
-				// Staggered reveal animations
-				const sections = document.querySelectorAll('section');
-
-				sections.forEach((section) => {
-					const reveals = section.querySelectorAll('[data-reveal]');
-					if (reveals.length === 0) return;
-
-					gsap.to(reveals, {
+			gsap.utils.toArray('[data-reveal]').forEach((element) => {
+				gsap.fromTo(
+					element,
+					{ autoAlpha: 0, y: 28 },
+					{
 						autoAlpha: 1,
-						duration: isMobile ? 0.6 : 0.9,
-						ease: 'power2.out',
-						stagger: isMobile ? 0.08 : 0.12,
+						duration: 0.85,
+						ease: 'power3.out',
 						y: 0,
 						scrollTrigger: {
-							trigger: section,
-							start: isMobile ? 'top 85%' : 'top 78%',
+							trigger: element,
+							start: 'top 88%',
 							once: true,
 						},
-					});
-				});
-
-				// Refresh after a short delay to ensure DOM is ready
-				requestAnimationFrame(() => {
-					ScrollTrigger.refresh();
-				});
-			} else {
-				// If reduced motion, just show everything
-				gsap.set(allReveals, { autoAlpha: 1, y: 0 });
-			}
-
-			// Counter animations
-			gsap.utils.toArray('[data-counter]').forEach((element) => {
-				const counter = element as HTMLElement;
-				const target = Number(counter.dataset.counter ?? '0');
-
-				if (reduceMotion) {
-					counter.textContent = String(target);
-					return;
-				}
-
-				const observer = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((entry) => {
-							if (entry.isIntersecting) {
-								animateCounter(counter);
-								observer.unobserve(counter);
-							}
-						});
 					},
-					{ threshold: 0.5 },
 				);
-
-				observer.observe(counter);
 			});
+
+			ScrollTrigger.refresh();
 		};
 
-		// Wait for everything to be ready
-		const start = () => {
-			// Small delay to ensure Astro hydration is complete
-			setTimeout(initAnimations, 100);
-		};
-
-		if (document.readyState === 'complete') {
-			start();
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initRevealAnimations, { once: true });
 		} else {
-			window.addEventListener('load', start, { once: true });
+			initRevealAnimations();
 		}
 	</script>
 </BaseLayout>
