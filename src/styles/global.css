@@ -1,18 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-	--font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--color-bon-950: #10243f;
-	--color-bon-900: #173b6d;
-	--color-bon-800: #dff0ff;
-	--color-bon-100: #ffffff;
-	--color-bon-soft: #f5f9ff;
-	--color-bon-blue: #1769ff;
-	--color-bon-sky: #35baf6;
-	--color-bon-pink: #ff4f9a;
-	--color-bon-coral: #ff7667;
-	--color-bon-lilac: #8b6dff;
-	--color-bon-line: #d8e6f7;
+	--font-sans: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+	--color-bon-black: #0b0b0d;
+	--color-bon-ink: #18171a;
+	--color-bon-muted: #666067;
+	--color-bon-pink: #d894a3;
+	--color-bon-rose: #b86f80;
+	--color-bon-blush: #f7e8ec;
+	--color-bon-blush-strong: #edcbd3;
+	--color-bon-line: #edd7dc;
+	--color-bon-white: #ffffff;
 }
 
 @layer base {
@@ -22,19 +20,20 @@
 
 	html {
 		scroll-behavior: smooth;
-		background: var(--color-bon-soft);
+		background: #ffffff;
 	}
 
 	body {
 		margin: 0;
 		min-height: 100vh;
-		background:
-			radial-gradient(circle at 10% 8%, rgba(53, 186, 246, 0.2), transparent 28rem),
-			radial-gradient(circle at 86% 12%, rgba(255, 79, 154, 0.14), transparent 30rem),
-			linear-gradient(180deg, #ffffff 0%, #f5f9ff 42%, #ffffff 100%);
-		color: var(--color-bon-950);
+		background: #ffffff;
+		color: var(--color-bon-black);
 		font-family: var(--font-sans);
 		text-rendering: geometricPrecision;
+	}
+
+	section[id] {
+		scroll-margin-top: 5rem;
 	}
 
 	a {
@@ -49,14 +48,16 @@
 		font: inherit;
 	}
 
-	img {
-		max-width: 100%;
+	img,
+	canvas,
+	svg {
 		display: block;
+		max-width: 100%;
 	}
 
 	::selection {
-		background: var(--color-bon-blue);
-		color: white;
+		background: var(--color-bon-blush-strong);
+		color: var(--color-bon-black);
 	}
 }
 
@@ -65,24 +66,31 @@
 		text-wrap: balance;
 	}
 
-	.surface-line {
-		border: 1px solid rgba(23, 59, 109, 0.11);
-		box-shadow: 0 18px 55px rgba(16, 36, 63, 0.08);
-	}
-
-	.soft-grid {
-		background-image:
-			linear-gradient(rgba(23, 105, 255, 0.06) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(23, 105, 255, 0.06) 1px, transparent 1px);
-		background-size: 32px 32px;
-	}
-
 	.focus-ring {
 		outline: 2px solid transparent;
-		outline-offset: 2px;
+		outline-offset: 3px;
 	}
 
 	.focus-ring:focus-visible {
-		outline-color: var(--color-bon-blue);
+		outline-color: var(--color-bon-rose);
+	}
+
+	.pink-rule {
+		background: var(--color-bon-pink);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
 	}
 }

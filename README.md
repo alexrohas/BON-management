@@ -7,6 +7,7 @@ Base tecnica para una landing profesional de scroll orientada a una agencia de O
 - Astro 6 con TypeScript estricto.
 - Tailwind CSS 4 mediante `@tailwindcss/vite`.
 - GSAP + ScrollTrigger para animaciones vinculadas al scroll.
+- Three.js para las escenas 3D del hero y servicios.
 - React configurado como isla opcional para componentes interactivos.
 - Lucide React preparado para iconos cuando se construyan controles o CTAs.
 
@@ -32,4 +33,5 @@ La pagina inicial ya incluye secciones de hero, sistema, servicios, proceso y CT
 
 ## Assets
 
-- `public/images/creator-studio.jpg`: imagen editorial de Unsplash usada como placeholder visual para el hero.
+- `public/brand/bon-management-source.png`: logo original proporcionado por el cliente.
+- `design/concepts/`: conceptos visuales usados como especificacion del rediseño blanco, negro y rosa.

@@ -8,5 +8,9 @@ export default defineConfig({
 	integrations: [react()],
 	vite: {
 		plugins: [tailwindcss()],
+		build: {
+			// Three.js is shared by the two intentional 3D scenes.
+			chunkSizeWarningLimit: 600,
+		},
 	},
 });

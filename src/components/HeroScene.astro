@@ -1,0 +1,286 @@
+<div class="hero-scene" data-hero-scene aria-hidden="true">
+	<canvas></canvas>
+	<div class="hero-scene__fallback">
+		<div class="fallback-phone"></div>
+		<div class="fallback-panel fallback-panel--left"></div>
+		<div class="fallback-panel fallback-panel--right"></div>
+	</div>
+</div>
+
+<script>
+	import {
+		ACESFilmicToneMapping,
+		CatmullRomCurve3,
+		DirectionalLight,
+		Group,
+		HemisphereLight,
+		Mesh,
+		MeshPhysicalMaterial,
+		MeshStandardMaterial,
+		PCFShadowMap,
+		PerspectiveCamera,
+		PlaneGeometry,
+		Scene,
+		ShadowMaterial,
+		SphereGeometry,
+		SRGBColorSpace,
+		TubeGeometry,
+		Vector3,
+		WebGLRenderer,
+	} from 'three';
+	import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
+
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	document.querySelectorAll<HTMLElement>('[data-hero-scene]').forEach((container) => {
+		if (container.dataset.ready === 'true') return;
+		container.dataset.ready = 'true';
+
+		const canvas = container.querySelector('canvas');
+		if (!canvas) return;
+
+		try {
+			const scene = new Scene();
+			const camera = new PerspectiveCamera(32, 1, 0.1, 100);
+			camera.position.set(0, 0.2, 11.5);
+
+			const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+			renderer.outputColorSpace = SRGBColorSpace;
+			renderer.toneMapping = ACESFilmicToneMapping;
+			renderer.toneMappingExposure = 1.15;
+			renderer.shadowMap.enabled = true;
+			renderer.shadowMap.type = PCFShadowMap;
+
+			const group = new Group();
+			group.rotation.set(-0.04, -0.16, -0.03);
+			scene.add(group);
+
+			const black = new MeshStandardMaterial({ color: 0x0b0b0d, roughness: 0.34, metalness: 0.42 });
+			const screen = new MeshPhysicalMaterial({ color: 0xfff8fa, roughness: 0.2, metalness: 0.05, clearcoat: 1 });
+			const pink = new MeshPhysicalMaterial({ color: 0xd894a3, roughness: 0.18, metalness: 0.05, clearcoat: 1 });
+			const acrylic = new MeshPhysicalMaterial({
+				color: 0xe6a8b5,
+				transparent: true,
+				opacity: 0.5,
+				roughness: 0.08,
+				metalness: 0,
+				transmission: 0.82,
+				thickness: 0.55,
+				ior: 1.42,
+				clearcoat: 1,
+			});
+
+			const phone = new Group();
+			const phoneBody = new Mesh(new RoundedBoxGeometry(2.35, 4.8, 0.36, 8, 0.22), black);
+			phoneBody.castShadow = true;
+			phone.add(phoneBody);
+
+			const phoneScreen = new Mesh(new RoundedBoxGeometry(2.08, 4.48, 0.08, 8, 0.17), screen);
+			phoneScreen.position.z = 0.205;
+			phone.add(phoneScreen);
+
+			const cameraSlot = new Mesh(new RoundedBoxGeometry(0.72, 0.16, 0.06, 4, 0.06), black);
+			cameraSlot.position.set(0, 1.98, 0.26);
+			phone.add(cameraSlot);
+			phone.position.set(1.05, 0.2, 0.1);
+			phone.rotation.y = -0.12;
+			group.add(phone);
+
+			const panelLeft = new Mesh(new RoundedBoxGeometry(2.05, 3.25, 0.1, 7, 0.12), acrylic);
+			panelLeft.position.set(-1.55, 0.2, 0.8);
+			panelLeft.rotation.y = 0.18;
+			panelLeft.rotation.z = -0.04;
+			panelLeft.castShadow = true;
+			group.add(panelLeft);
+
+			const panelRight = new Mesh(new RoundedBoxGeometry(2.2, 2.6, 0.1, 7, 0.12), acrylic);
+			panelRight.position.set(2.35, -0.72, 1.02);
+			panelRight.rotation.y = -0.22;
+			panelRight.rotation.z = 0.07;
+			panelRight.castShadow = true;
+			group.add(panelRight);
+
+			const chat = new Group();
+			const chatBody = new Mesh(new RoundedBoxGeometry(1.58, 1.05, 0.42, 8, 0.2), pink);
+			chatBody.castShadow = true;
+			chat.add(chatBody);
+
+			[-0.36, 0, 0.36].forEach((x) => {
+				const dot = new Mesh(new SphereGeometry(0.08, 24, 24), black);
+				dot.position.set(x, 0, 0.24);
+				chat.add(dot);
+			});
+			chat.position.set(-1.05, -1.25, 1.65);
+			chat.rotation.y = 0.16;
+			group.add(chat);
+
+			const ribbonCurve = new CatmullRomCurve3([
+				new Vector3(-3.8, -2.2, -0.5),
+				new Vector3(-2.1, -1.55, 0.1),
+				new Vector3(-0.3, -2.0, -0.25),
+				new Vector3(1.25, -1.25, -0.35),
+				new Vector3(3.6, -0.25, -0.6),
+			]);
+			const ribbon = new Mesh(new TubeGeometry(ribbonCurve, 96, 0.18, 12, false), black);
+			ribbon.castShadow = true;
+			group.add(ribbon);
+
+			const floor = new Mesh(
+				new PlaneGeometry(16, 12),
+				new ShadowMaterial({ color: 0x9d6673, opacity: 0.13 }),
+			);
+			floor.rotation.x = -Math.PI / 2;
+			floor.position.y = -2.55;
+			floor.receiveShadow = true;
+			scene.add(floor);
+
+			const key = new DirectionalLight(0xffffff, 4.8);
+			key.position.set(-3, 7, 7);
+			key.castShadow = true;
+			key.shadow.mapSize.set(1024, 1024);
+			scene.add(key);
+
+			const fill = new DirectionalLight(0xf2a9b9, 2.4);
+			fill.position.set(5, 1, 4);
+			scene.add(fill);
+			scene.add(new HemisphereLight(0xffffff, 0xe7b8c1, 2.5));
+
+			let targetX = 0;
+			let targetY = 0;
+			let visible = true;
+
+			const resize = () => {
+				const width = Math.max(container.clientWidth, 1);
+				const height = Math.max(container.clientHeight, 1);
+				renderer.setSize(width, height, false);
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+				const isMobile = width < 640;
+				group.scale.setScalar(isMobile ? 0.78 : 1);
+				group.position.set(isMobile ? 0.65 : 0, isMobile ? -0.15 : 0, 0);
+			};
+
+			const onPointerMove = (event: PointerEvent) => {
+				const rect = container.getBoundingClientRect();
+				targetX = ((event.clientX - rect.left) / rect.width - 0.5) * 0.28;
+				targetY = ((event.clientY - rect.top) / rect.height - 0.5) * 0.18;
+			};
+
+			container.addEventListener('pointermove', onPointerMove, { passive: true });
+			const resizeObserver = new ResizeObserver(resize);
+			resizeObserver.observe(container);
+
+			const visibilityObserver = new IntersectionObserver(([entry]) => {
+				visible = entry.isIntersecting;
+			});
+			visibilityObserver.observe(container);
+
+			const startedAt = Date.now();
+			const animate = () => {
+				requestAnimationFrame(animate);
+				if (!visible) return;
+
+				if (!reduceMotion) {
+					const elapsed = (Date.now() - startedAt) / 1000;
+					group.rotation.y += (targetX - group.rotation.y) * 0.035;
+					group.rotation.x += (-targetY - group.rotation.x) * 0.035;
+					group.position.y += (Math.sin(elapsed * 0.7) * 0.06 - group.position.y) * 0.025;
+					chat.rotation.z = Math.sin(elapsed * 0.9) * 0.035;
+				}
+
+				renderer.render(scene, camera);
+			};
+
+			resize();
+			container.classList.add('is-ready');
+			canvas.style.opacity = '1';
+			const fallback = container.querySelector<HTMLElement>('.hero-scene__fallback');
+			if (fallback) fallback.style.opacity = '0';
+			animate();
+		} catch {
+			container.classList.add('has-fallback');
+		}
+	});
+</script>
+
+<style>
+	.hero-scene {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		min-height: 34rem;
+	}
+
+	.hero-scene canvas {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		transition: opacity 500ms ease;
+	}
+
+	.hero-scene.is-ready canvas {
+		opacity: 1;
+	}
+
+	.hero-scene__fallback {
+		position: absolute;
+		inset: 0;
+		transition: opacity 300ms ease;
+	}
+
+	.hero-scene.is-ready .hero-scene__fallback {
+		opacity: 0;
+	}
+
+	.fallback-phone,
+	.fallback-panel {
+		position: absolute;
+		border: 1px solid rgba(166, 98, 114, 0.28);
+		box-shadow: 0 30px 80px rgba(88, 50, 60, 0.14);
+	}
+
+	.fallback-phone {
+		left: 42%;
+		top: 14%;
+		width: 34%;
+		height: 68%;
+		background: #111113;
+		border-radius: 8px;
+		transform: rotate(5deg);
+	}
+
+	.fallback-panel {
+		width: 32%;
+		height: 44%;
+		background: rgba(231, 170, 183, 0.28);
+		backdrop-filter: blur(8px);
+		border-radius: 8px;
+	}
+
+	.fallback-panel--left {
+		left: 17%;
+		top: 31%;
+		transform: rotate(-7deg);
+	}
+
+	.fallback-panel--right {
+		right: 4%;
+		bottom: 13%;
+		transform: rotate(7deg);
+	}
+
+	@media (max-width: 1023px) {
+		.hero-scene {
+			min-height: 27rem;
+		}
+	}
+
+	@media (max-width: 639px) {
+		.hero-scene {
+			min-height: 19rem;
+		}
+	}
+</style>
